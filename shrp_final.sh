@@ -138,7 +138,7 @@ package_extract_file("recovery.img", "$SHRP_REC");
 set_progress(0.700000);
 ui_print("                                                  ");
 ui_print("Contact Us,");
-ui_print(" + Website- http://shrp.team                        ");
+ui_print(" + Website- https://skyhawkrecovery.github.io     ");
 ui_print(" + Telegram Group - t.me/sky_hawk                 ");
 ui_print(" + Telegram Channel - t.me/shrp_official          ");
 set_progress(1.000000);
