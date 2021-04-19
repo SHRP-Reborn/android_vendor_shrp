@@ -44,11 +44,11 @@ except ImportError:
 DEBUG = False
 default_manifest = ".repo/manifest.xml"
 
-custom_local_manifest = ".repo/local_manifests/potato_manifest.xml"
-custom_default_revision = "aligot-release"
-custom_dependencies = "potato.dependencies"
+custom_local_manifest = ".repo/local_manifests/shrp_manifest.xml"
+custom_default_revision = "android-9.0"
+custom_dependencies = "omni.dependencies"
 org_manifest = "devices"  # leave empty if org is provided in manifest
-org_display = "PotatoDevices"  # needed for displaying
+org_display = "SHRP-Devices"  # needed for displaying
 
 github_auth = None
 
