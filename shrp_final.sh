@@ -99,9 +99,10 @@ EOF
 
 cp -a "$SHRP_WORK_DIR/Files" "$SHRP_OUT/addonRescue/Files"
 
+echo "SHRP_HAS_RECOVERY_PARTITION=$SHRP_HAS_RECOVERY_PARTITION"
 
 #Final scripting before zipping
-if [[ $SHRP_AB = true ]]; then
+if [[ $SHRP_AB = true ]] && [ -z "$SHRP_HAS_RECOVERY_PARTITION" -o "$SHRP_HAS_RECOVERY_PARTITION" == "false" ]; then
 
   resetFolder $OUT/script
 
