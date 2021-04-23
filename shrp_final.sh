@@ -102,28 +102,7 @@ cp -a "$SHRP_WORK_DIR/Files" "$SHRP_OUT/addonRescue/Files"
 echo "SHRP_HAS_RECOVERY_PARTITION=$SHRP_HAS_RECOVERY_PARTITION"
 
 #Final scripting before zipping
-if [[ $SHRP_AB = true ]] && [ -z "$SHRP_HAS_RECOVERY_PARTITION" -o "$SHRP_HAS_RECOVERY_PARTITION" == "false" ]; then
-
-  resetFolder $OUT/script
-
-  cat > $OUT/script/x <<EOF
-ui_print "----------------------------------------";
-ui_print "-                                       ";
-ui_print "- SHRP installer for A/B devices        ";
-ui_print "- Device: $SHRP_DEVICE                  ";
-ui_print "- Version: $SHRP_VERSION $SHRP_STATUS   ";
-ui_print "- Maintainer: $SHRP_MAINTAINER";
-ui_print "-                                       ";
-ui_print "----------------------------------------";
-ui_print " ";
-EOF
-
-  #Joining all the updater binary parts into one
-  cat "$SHRP_VENDOR/updater/a" "$OUT/script/x" "$SHRP_VENDOR/updater/b" > "$SHRP_WORK_DIR/META-INF/com/google/android/update-binary"
-
-  cp "$RECOVERY_RAM" "$SHRP_WORK_DIR"
-  cp "$MAGISKBOOT"  "$SHRP_WORK_DIR"
-else
+if [ "$SHRP_AB" != "true" ] || [ "$SHRP_HAS_RECOVERY_PARTITION" == "true" ];then
 
   cat > "$SHRP_WORK_DIR/META-INF/com/google/android/updater-script" <<EOF
 show_progress(1.000000, 0);
@@ -147,6 +126,29 @@ ui_print("");
 EOF
   cp -R "$SHRP_VENDOR/updater/update-binary" "$SHRP_WORK_DIR/META-INF/com/google/android/update-binary"
   cp "$RECOVERY_IMG" "$SHRP_WORK_DIR"
+
+else
+
+  resetFolder $OUT/script
+
+  cat > $OUT/script/x <<EOF
+ui_print "----------------------------------------";
+ui_print "-                                       ";
+ui_print "- SHRP installer for A/B devices        ";
+ui_print "- Device: $SHRP_DEVICE                  ";
+ui_print "- Version: $SHRP_VERSION $SHRP_STATUS   ";
+ui_print "- Maintainer: $SHRP_MAINTAINER";
+ui_print "-                                       ";
+ui_print "----------------------------------------";
+ui_print " ";
+EOF
+
+  #Joining all the updater binary parts into one
+  cat "$SHRP_VENDOR/updater/a" "$OUT/script/x" "$SHRP_VENDOR/updater/b" > "$SHRP_WORK_DIR/META-INF/com/google/android/update-binary"
+
+  cp "$RECOVERY_RAM" "$SHRP_WORK_DIR"
+  cp "$MAGISKBOOT"  "$SHRP_WORK_DIR"
+
 fi;
 
 echo -e ""
