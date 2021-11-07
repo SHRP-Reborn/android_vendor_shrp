@@ -14,21 +14,6 @@
 #See the License for the specific language governing permissions and
 #limitations under the License.
 ##########################################################################
-CLR_RST=$(tput sgr0)                        ## reset flag
-CLR_RED=$CLR_RST$(tput setaf 1)             #  red, plain
-CLR_GRN=$CLR_RST$(tput setaf 2)             #  green, plain
-CLR_YLW=$CLR_RST$(tput setaf 3)             #  yellow, plain
-CLR_BLU=$CLR_RST$(tput setaf 4)             #  blue, plain
-CLR_PPL=$CLR_RST$(tput setaf 5)             #  purple,plain
-CLR_CYA=$CLR_RST$(tput setaf 6)             #  cyan, plain
-CLR_BLD=$(tput bold)                        ## bold flag
-CLR_BLD_RED=$CLR_RST$CLR_BLD$(tput setaf 1) #  red, bold
-CLR_BLD_GRN=$CLR_RST$CLR_BLD$(tput setaf 2) #  green, bold
-CLR_BLD_YLW=$CLR_RST$CLR_BLD$(tput setaf 3) #  yellow, bold
-CLR_BLD_BLU=$CLR_RST$CLR_BLD$(tput setaf 4) #  blue, bold
-CLR_BLD_PPL=$CLR_RST$CLR_BLD$(tput setaf 5) #  purple, bold
-CLR_BLD_CYA=$CLR_RST$CLR_BLD$(tput setaf 6) #  cyan, bold
-
 #initializing helper function
 . build/shrp/shrpEnv.sh
 
@@ -154,10 +139,12 @@ fi;
 echo -e ""
 cd $SHRP_WORK_DIR
 zip -r ${ZIP_NAME}.zip *
+cd ../../../../../
 mv $SHRP_WORK_DIR/*.zip $SHRP_OUT
 
 cd $SHRP_OUT/addonRescue
 zip -r ${ADDON_ZIP_NAME}.zip *
+cd ../../../../../
 mv $SHRP_OUT/addonRescue/*.zip $SHRP_OUT
 
 #Helper for displaying the Result
@@ -169,25 +156,25 @@ ADDONZIPFILE_SHA1=$(sha1sum -b $ADDONZIPFILE)
 #Result
 echo ""
 echo ""
-echo "$CLR_CYA|${CLR_BLD}SKYHAWK Recovery Project${CLR_RST}$CLR_CYA-----------------------------------------$CLR_RST"
-echo "|${CLR_BLD_YLW}Device -${CLR_RST} $SHRP_DEVICE"
-echo "|${CLR_BLD_YLW}Maintainer -${CLR_RST} $SHRP_MAINTAINER"
+echo "|SKYHAWK Recovery Project-----------------------------------------"
+echo "|Device - $SHRP_DEVICE"
+echo "|Maintainer - $SHRP_MAINTAINER"
 if [[ $XSTATUS = Unofficial ]]; then
-    echo "|${CLR_BLD_YLW}Build -${CLR_RST} ${CLR_BLD_RED}${XSTATUS}${CLR_RST} Build"
+    echo "|Build - ${XSTATUS} Build"
 else
-    echo "|${CLR_BLD_YLW}Build -${CLR_RST} ${CLR_BLD_GRN}${XSTATUS}${CLR_RST} Build"
+    echo "|Build - ${XSTATUS} Build"
 fi;
-echo "|${CLR_BLD_YLW}Version -${CLR_RST} $SHRP_VERSION $SHRP_STATUS"
+echo "|Version - $SHRP_VERSION $SHRP_STATUS"
 echo ""
-echo "$CLR_CYA|${CLR_BLD}File Info${CLR_RST}$CLR_CYA--------------------------------------------------------$CLR_RST"
-echo "|${CLR_BLD_YLW}Recovery ZIP -${CLR_RST} $ZIP_NAME.zip"
-echo "|${CLR_BLD_YLW}File Size -${CLR_RST} $(getSize $ZIPFILE)"
-echo "|${CLR_BLD_YLW}SHA1 -${CLR_RST} ${ZIPFILE_SHA1:0:40}"
+echo "|File Info--------------------------------------------------------"
+echo "|Recovery ZIP - $ZIP_NAME.zip"
+echo "|File Size - $(getSize $ZIPFILE)"
+echo "|SHA1 - ${ZIPFILE_SHA1:0:40}"
 echo ""
-echo "|${CLR_BLD_YLW}Addon Rescue ZIP -${CLR_RST} $ADDON_ZIP_NAME.zip"
-echo "|${CLR_BLD_YLW}File Size -${CLR_RST} $(getSize $ADDONZIPFILE)"
-echo "|${CLR_BLD_YLW}SHA1 -${CLR_RST} ${ADDONZIPFILE_SHA1:0:40}"
+echo "|Addon Rescue ZIP - $ADDON_ZIP_NAME.zip"
+echo "|File Size - $(getSize $ADDONZIPFILE)"
+echo "|SHA1 - ${ADDONZIPFILE_SHA1:0:40}"
 echo ""
-echo "$CLR_CYA--------------------------------------${CLR_BLD}BUILD SUCCESSFULLY COMPLETED${CLR_RST}"
+echo "--------------------------------------BUILD SUCCESSFULLY COMPLETED"
 echo ""
 echo ""
