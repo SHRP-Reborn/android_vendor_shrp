@@ -19,7 +19,8 @@ cp $tmp/Files/SHRP/addons/magiskboot $tmp;
 tool=$tmp/magiskboot;
 test "$tool" || abort "[!!] No magiskboot binary found! Aborting.";
 recoverycpio=`(ls ramdisk-twrp.cpio || ls ramdisk-recovery.cpio) 2>/dev/null`;
-test "$recoverycpio" || abort "[!!] No SHRP ramdisk cpio found! Aborting.";
+recoveryimg=`(ls twrp*.img || ls TWRP*.img || ls recovery.img) 2>/dev/null`;
+test "$recoveryimg" || "$recoverycpio" || abort "[!!] No SHRP ramdisk cpio found! Aborting.";
 
 chmod 755 $tool;
 

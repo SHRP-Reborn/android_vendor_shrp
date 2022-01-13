@@ -131,7 +131,7 @@ EOF
   #Joining all the updater binary parts into one
   cat "$SHRP_VENDOR/updater/a" "$OUT/script/x" "$SHRP_VENDOR/updater/b" > "$SHRP_WORK_DIR/META-INF/com/google/android/update-binary"
 
-  cp "$RECOVERY_RAM" "$SHRP_WORK_DIR"
+  cp "$RECOVERY_IMG" "$SHRP_WORK_DIR"
   cp "$MAGISKBOOT"  "$SHRP_WORK_DIR"
 
 fi;
