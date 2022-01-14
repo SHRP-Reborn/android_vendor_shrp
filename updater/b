@@ -23,34 +23,31 @@ recoveryimg=`(ls twrp*.img || ls TWRP*.img || ls recovery.img) 2>/dev/null`;
 test "$recoveryimg" || "$recoverycpio" || abort "[!!] No SHRP ramdisk cpio found! Aborting.";
 
 chmod 755 $tool;
-
-workDIR=$tmp/work/;
+workDIR=$tmp/work;
 mkdir -p $workDIR;
 cd $workDIR;
 
 for slot in a b; do
+  mkdir unpack
   ui_print "[i] Making a backup of boot_$slot...";
   dd if=/dev/block/bootdevice/by-name/boot_$slot of=/sdcard/boot_$slot.img;
   ui_print "[i] Running boot image patcher on slot $slot...";
-  dd if=/dev/block/bootdevice/by-name/boot_$slot of=recovery.img;
-
-  $tool unpack -h recovery.img;
-
+  dd if=/dev/block/bootdevice/by-name/boot_$slot of=boot.img;
+  $tool unpack -h boot.img;
   # kernel string want_initramfs -> skip_initramfs (Magisk)
   $tool hexpatch kernel 77616E745F696E697472616D6673 736B69705F696E697472616D6673;
   # kernel string trip_initramfs -> skip_initramfs (SuperSU)
   $tool hexpatch kernel 747269705F696E697472616D6673 736B69705F696E697472616D6673;
-
   # boot.img header cmdline remove skip_override (flar2 patch)
   sed -i "s|$(grep '^cmdline=' header | cut -d= -f2-)|$(grep '^cmdline=' header | cut -d= -f2- | sed -e 's/skip_override//' -e 's/  */ /g' -e 's/[ \t]*$//')|" header;
-
-  cp -f $tmp/$recoverycpio $workDIR;
-  cp -f $recoverycpio ramdisk.cpio;
-  $tool repack recovery.img newRec.img;
-
+  cp -f $tmp/$recoveryimg "$workDIR/unpack";
+  cd unpack
+  "$tool" unpack recovery.img
+  cp ramdisk.cpio "$workDIR"/ramdisk.cpio
+  cd ..
+  "$tool" repack boot.img newRec.img
   dd if=newRec.img of=/dev/block/bootdevice/by-name/boot_$slot || abort "[!!] Unable to find patched bootimg! Aborting.";
-  rm -r *;
-
+  rm -rf *;
   ui_print "[i] Slot $slot patched!";
 done;
 ui_print "[i] Cleaning up...";
