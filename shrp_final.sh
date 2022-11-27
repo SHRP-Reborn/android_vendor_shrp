@@ -22,8 +22,8 @@
 rm -rf "$SHRP_OUT"/*.zip
 
 #Local Variables for final processes
-ZIP_NAME=SHRP_v${SHRP_VERSION}_${SHRP_STATUS}-${XSTATUS}_$SHRP_DEVICE-$SHRP_BUILD_DATE
-ADDON_ZIP_NAME=SHRP_AddonRescue_v${SHRP_VERSION}_$SHRP_DEVICE-$SHRP_BUILD_DATE
+ZIP_NAME=SHRP_v${SHRP_VERSION}_${SHRP_STATUS}-${XSTATUS}_$SHRP_DEVICE-$(date -u +%d.%m.%y)
+ADDON_ZIP_NAME=SHRP_AddonRescue_v${SHRP_VERSION}_$SHRP_DEVICE-$(date -u +%d.%m.%y)
 
 #Reseting folders [Specifically For Dirty build]
 resetFolder $SHRP_WORK_DIR
