@@ -30,6 +30,7 @@ resetFolder $SHRP_WORK_DIR
 resetFolder $SHRP_META_DATA_DIR
 resetFolder "$SHRP_WORK_DIR/META-INF/com/google/android"
 resetFolder "$SHRP_WORK_DIR/Files/SHRP/data"
+resetFolder "$SHRP_WORK_DIR/Files/SHRP/addons"
 resetFolder "$SHRP_OUT/addonRescue/"
 resetFolder "$SHRP_OUT/addonRescue/META-INF/com/google/android/"
 
