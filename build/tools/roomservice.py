@@ -45,10 +45,10 @@ DEBUG = False
 default_manifest = ".repo/manifest.xml"
 
 custom_local_manifest = ".repo/local_manifests/shrp_manifest.xml"
-custom_default_revision = "android-9.0"
-custom_dependencies = "omni.dependencies"
+custom_default_revision = "android-12.1"
+custom_dependencies = "twrp.dependencies"
 org_manifest = "devices"  # leave empty if org is provided in manifest
-org_display = "SHRP-Devices"  # needed for displaying
+org_display = "SHRP-Reborn"  # needed for displaying
 
 github_auth = None
 

@@ -9,7 +9,7 @@ rm -rf $tmp;
 mkdir -p $tmp;
 unzip -o "$ZIPFILE" -d $tmp || abort "[!!] Failed to extract zip! Check recovery logs.";
 
-ui_print "[i] Copying SHRP add-ons...";
+ui_print "[i] Copying SHRP Reborn add-ons...";
 rm -rf /sdcard/SHRP/
 mkdir -p /sdcard/SHRP/
 cp -r $tmp/Files/SHRP/addons /sdcard/SHRP
@@ -20,7 +20,7 @@ tool=$tmp/magiskboot;
 test "$tool" || abort "[!!] No magiskboot binary found! Aborting.";
 recoverycpio=`(ls ramdisk-twrp.cpio || ls ramdisk-recovery.cpio) 2>/dev/null`;
 recoveryimg=`(ls twrp*.img || ls TWRP*.img || ls recovery.img) 2>/dev/null`;
-test "$recoveryimg" || "$recoverycpio" || abort "[!!] No SHRP ramdisk cpio found! Aborting.";
+test "$recoveryimg" || "$recoverycpio" || abort "[!!] No SHRP Reborn ramdisk cpio found! Aborting.";
 
 chmod 755 $tool;
 workDIR=$tmp/work;

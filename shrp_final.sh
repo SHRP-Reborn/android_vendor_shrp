@@ -1,6 +1,7 @@
 #!/bin/bash
 ##########################################################################
 #Copyright 2019 - 2020 SKYHAWK RECOVERY PROJECT
+#Copyright 2020 - 2023 SKYHAWK RECOVERY PROJECT REBORN
 #
 #Licensed under the Apache License, Version 2.0 (the "License");
 #you may not use this file except in compliance with the License.
@@ -22,8 +23,8 @@
 rm -rf "$SHRP_OUT"/*.zip
 
 #Local Variables for final processes
-ZIP_NAME=SHRP_v${SHRP_VERSION}_${SHRP_STATUS}-${XSTATUS}_$SHRP_DEVICE-$(date -u +%d.%m.%y)
-ADDON_ZIP_NAME=SHRP_AddonRescue_v${SHRP_VERSION}_$SHRP_DEVICE-$(date -u +%d.%m.%y)
+ZIP_NAME=SHRP-Reborn_v${SHRP_VERSION}_${SHRP_STATUS}-${XSTATUS}_$SHRP_DEVICE-$(date -u +%d.%m.%y)
+ADDON_ZIP_NAME=SHRP-Reborn_AddonRescue_v${SHRP_VERSION}_$SHRP_DEVICE-$(date -u +%d.%m.%y)
 
 #Reseting folders [Specifically For Dirty build]
 resetFolder $SHRP_WORK_DIR
@@ -93,7 +94,7 @@ if [ "$SHRP_AB" != "true" ] || [ "$SHRP_HAS_RECOVERY_PARTITION" == "true" ];then
   cat > "$SHRP_WORK_DIR/META-INF/com/google/android/updater-script" <<EOF
 show_progress(1.000000, 0);
 ui_print("             ");
-ui_print("Skyhawk Recovery Project                  ");
+ui_print("Skyhawk Recovery Project Reborn                  ");
 ui_print("|SHRP version - $SHRP_VERSION $SHRP_STATUS    ");
 ui_print("|Device - $SHRP_DEVICE");
 ui_print("|Maintainer - $SHRP_MAINTAINER");
@@ -104,9 +105,9 @@ package_extract_file("recovery.img", "$SHRP_REC");
 set_progress(0.700000);
 ui_print("                                                  ");
 ui_print("Contact Us,");
-ui_print(" + Website- https://skyhawkrecovery.github.io     ");
-ui_print(" + Telegram Group - t.me/sky_hawk                 ");
-ui_print(" + Telegram Channel - t.me/shrp_official          ");
+ui_print(" + Website- https://shrp-reborn.github.io     ");
+ui_print(" + Telegram Group - t.me/shrp_reborn                 ");
+ui_print(" + Telegram Channel - t.me/shrp_reborn_updates          ");
 set_progress(1.000000);
 ui_print("");
 EOF
@@ -120,10 +121,10 @@ else
   cat > $OUT/script/x <<EOF
 ui_print "----------------------------------------";
 ui_print "-                                       ";
-ui_print "- SHRP installer for A/B devices        ";
+ui_print "- SHRP Reborn installer for A/B devices ";
 ui_print "- Device: $SHRP_DEVICE                  ";
 ui_print "- Version: $SHRP_VERSION $SHRP_STATUS   ";
-ui_print "- Maintainer: $SHRP_MAINTAINER";
+ui_print "- Maintainer: $SHRP_MAINTAINER          ";
 ui_print "-                                       ";
 ui_print "----------------------------------------";
 ui_print " ";
@@ -158,7 +159,7 @@ ADDONZIPFILE_SHA1=$(sha1sum -b $ADDONZIPFILE)
 #Result
 echo ""
 echo ""
-echo "|SKYHAWK Recovery Project-----------------------------------------"
+echo "|SKYHAWK Recovery Project Reborn-----------------------------------------"
 echo "|Device - $SHRP_DEVICE"
 echo "|Maintainer - $SHRP_MAINTAINER"
 if [[ $XSTATUS = Unofficial ]]; then
